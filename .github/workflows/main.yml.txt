@@ -1,0 +1,34 @@
+name: GitHub Event Triggers
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  pull_request_target:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Push Event Trigger
+      run: |
+        echo "Push event triggered" > event.txt
+        git add event.txt
+        git commit -m "Test push"
+        git push origin main
+
+    - name: Pull Request Trigger
+      run: |
+        echo "Pull request event triggered" > event.txt
+        git add event.txt
+        git commit -m "Test PR"
+        git push origin main
